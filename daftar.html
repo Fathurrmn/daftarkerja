@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Pendaftaran Kerja</title>
+    <!-- Tambahkan Script EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            // Ganti YOUR_PUBLIC_KEY dengan public key dari dashboard EmailJS
+            emailjs.init("LmWxR9PRwTMvwUMR3");
+        })();
+    </script>
+    <form id="jobForm" onsubmit="return sendEmail(event)">
+        <!-- Form fields tetap sama -->
+    </form>
+    <!-- CSS tetap sama seperti sebelumnya -->
+</head>
+    <style>
+        /* CSS sama seperti sebelumnya */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://cdn.discordapp.com/attachments/1321480740965191753/1321483640646926356/IMG_20241107_143448.jpg?ex=67871c4b&is=6785cacb&hm=e275b33914a0ce772f58e9b3e421711529897faa36f01b6d92507f33829dcb11&');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 500px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulir Pendaftaran Kerja</h2>
+        <form id="jobForm" onsubmit="sendEmail(event)">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telepon">Nomor Telepon</label>
+                <input type="tel" id="telepon" name="telepon" required>
+            </div>
+
+           <!-- Tambahkan setelah form-group posisi -->
+<div class="form-group">
+    <label for="perusahaan">Perusahaan yang Dilamar</label>
+    <select id="perusahaan" name="perusahaan" required>
+        <option value="">Pilih Perusahaan</option>
+        <option value="Gojek">Gojek</option>
+        <option value="Indonesia Stock Exchange">Indonesia Stock Exchange</option>
+        <option value="Sampoerna Strategic">Sampoerna Strategic</option>
+        <option value="Adaro">Adaro</option>
+        <option value="Pertamina">Pertamina</option>
+        <option value="SRC">SRC</option>
+        <option value="BCA">BCA</option>
+        <option value="Indosat">Indosat</option>
+        <option value="Telkomsel">Telkomsel</option>
+        <option value="Komdigi">Komdigi</option>
+        <option value="Indofood">Indofood</option>
+        <option value="Shangri-la">Shangri-la</option>
+        <option value="Astra International">Astra International</option>
+        <option value="Tokopedia">Tokopedia</option>
+    </select>
+</div>
+
+<!-- Modifikasi pada pilihan posisi -->
+<div class="form-group">
+    <label for="posisi">Posisi yang Dilamar</label>
+    <select id="posisi" name="posisi" required>
+        <option value="">Pilih Posisi</option>
+        <option value="Customer Service">Customer Service</option>
+        <option value="Financial Analyst">Financial Analyst</option>
+        <option value="Trade Marketing Officer">Trade Marketing Officer</option>
+        <option value="Environmental Engineer">Environmental Engineer</option>
+        <option value="Electrical Engineer">Electrical Engineer</option>
+        <option value="Vendor Relations Officer">Vendor Relations Officer</option>
+        <option value="Risk Management Specialist">Risk Management Specialist</option>
+        <option value="Motion Graphics Designer">Motion Graphics Designer</option>
+        <option value="Intern Data Analyst">Intern Data Analyst</option>
+        <option value="Intern Konten Digital">Intern Konten Digital</option>
+        <option value="Intern Distribusi">Intern Distribusi</option>
+        <option value="Intern Resepsionis">Intern Resepsionis</option>
+        <option value="Sistem Informasi Manajemen">Sistem Informasi Manajemen</option>
+        <option value="Intern Growth Strategy">Intern Growth Strategy</option>
+    </select>
+</div>
+
+<!-- Tambahkan checkbox untuk jenis pekerjaan -->
+<div class="form-group">
+    <label>Jenis Pekerjaan</label>
+    <div style="display: flex; gap: 20px;">
+        <label style="display: inline-flex; align-items: center;">
+            <input type="radio" name="jenisPekerjaan" value="Kerja" required style="width: auto; margin-right: 5px;">
+            Kerja
+        </label>
+        <label style="display: inline-flex; align-items: center;">
+            <input type="radio" name="jenisPekerjaan" value="Magang" required style="width: auto; margin-right: 5px;">
+            Magang
+        </label>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="cv">Upload CV (PDF/DOC/DOCX)</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+</div>
+
+
+            <div class="form-group">
+                <label for="pengalaman">Pengalaman Kerja (Tahun)</label>
+                <input type="number" id="pengalaman" name="pengalaman" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pendidikan">Pendidikan Terakhir</label>
+                <select id="pendidikan" name="pendidikan" required>
+                    <option value="">Pilih Pendidikan</option>
+                    <option value="SMA/SMK">SMA/SMK</option>
+                    <option value="D3">D3</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="catatan">Catatan Tambahan</label>
+                <textarea id="catatan" name="catatan" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Kirim Lamaran</button>
+        </form>
+    </div>
+
+    <script>
+        function sendEmail(e) {
+            e.preventDefault();
+            
+            // Mengambil semua data form
+            const nama = document.getElementById('nama').value;
+            const email = document.getElementById('email').value;
+            const telepon = document.getElementById('telepon').value;
+            const posisi = document.getElementById('posisi').value;
+            const pengalaman = document.getElementById('pengalaman').value;
+            const pendidikan = document.getElementById('pendidikan').value;
+            const catatan = document.getElementById('catatan').value;
+
+            // Format body email
+            const body = `
+Lamaran Kerja Baru
+
+Nama: ${nama}
+Email: ${email}
+Telepon: ${telepon}
+Posisi: ${posisi}
+Pengalaman: ${pengalaman} tahun
+Pendidikan: ${pendidikan}
+
+Catatan:
+${catatan}
+            `.trim();
+
+            // Format subject email
+            const subject = `Lamaran Kerja - ${posisi} - ${nama}`;
+
+            // Buat mailto link
+            const mailtoLink = `mailto:fathur.fr508@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Buka email client
+            window.location.href = mailtoLink;
+
+            // Reset form setelah mengirim
+            document.getElementById('jobForm').reset();
+        }
+    </script>
+</body>
+</html>

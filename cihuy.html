@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch AI Data</title>
+    <link rel="stylesheet" href="cihuy.css" />
+  </head>
+  <body>
+    <h1>Fetch Data from AI API</h1>
+    <form id="apiForm">
+      <label for="message">Enter your message:</label>
+      <input
+        type="text"
+        id="message"
+        name="message"
+        placeholder="Type your message here..."
+        required
+      />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="output"></div>
+ 
+    <script>
+        document.getElementById('apiForm').addEventListener('submit', async (event) => {
+          event.preventDefault(); // Prevent form from reloading the page
+  
+          const message = document.getElementById('message').value;
+          
+          const apiKey = 'AIzaSyBL-C92cJgkp5gv2UCgqUTvbFbfmd7B6Ak'; // Replace with your actual API key
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+          const requestData = {
+            contents: [
+              {
+                parts: [{ text: message }],
+              },
+            ],
+          };
+  
+          try {
+            document.getElementById('output').innerHTML = 'Fetching data...';
+  
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(requestData),
+            });
+  
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+  
+            const data = await response.json();
+  
+            // Extract and format the text
+            const rawText = data.candidates[0].content.parts[0].text;
+  
+            // Replace \n with <br> and remove "* " after \n
+            const formattedText = rawText
+              .replace(/\n/g, '<br>') // Replace \n with <br>
+              .replace(/<br>\* /g, '<br>') // Remove "* " after <br>
+              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+            document.getElementById('output').innerHTML = formattedText;
+          } catch (error) {
+            document.getElementById('output').innerHTML = `Error: ${error.message}`;
+          }
+        });
+      </script>
+      
+  </body>
+</html>
